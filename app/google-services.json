@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "94098436679",
+    "firebase_url": "https://proyecto-integrador-dh2.firebaseio.com",
+    "project_id": "proyecto-integrador-dh2",
+    "storage_bucket": "proyecto-integrador-dh2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94098436679:android:7fdf2d0e8c0aaefc",
+        "android_client_info": {
+          "package_name": "com.integrador.grupo2android.proyectointegrador"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94098436679-fpmie4q4ulaiiag8lpb18m7em9epkmps.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.integrador.grupo2android.proyectointegrador",
+            "certificate_hash": "65d0f5016bbc473e79dacf88c17fecab3c0bb564"
+          }
+        },
+        {
+          "client_id": "94098436679-ikcl4993rj7tk6gmocm9jj5a0kt9sv77.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxBHXt5Uy1FWWPIjj8LZDGFdHYprZ5bLQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94098436679-ikcl4993rj7tk6gmocm9jj5a0kt9sv77.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

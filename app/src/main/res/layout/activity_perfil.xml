@@ -1,0 +1,258 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/divider"
+    android:orientation="vertical">
+
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+
+        <ImageView
+            android:id="@+id/linearLayoutPortada"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/elsecretodesusojos" />
+
+
+        <RelativeLayout
+            android:id="@+id/layoutRelativePerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_anchor="@id/linearLayoutPortada"
+            app:layout_anchorGravity="bottom">
+
+
+            <TextView
+                android:id="@+id/textViewNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Nombre"
+                android:textAlignment="center"
+                android:textColor="#e0e0e0"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/buttonSeguirPerfil"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/textViewNombre"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:drawableRight="@drawable/ic_person_add_black_24dp"
+                android:text="Seguir"
+                android:backgroundTint="@color/primary_dark"
+                android:textColor="@color/primary_light"/>
+
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/imageViewFotoPerfil"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/eduperfil"
+            app:layout_anchor="@id/linearLayoutPortada"
+            app:layout_anchorGravity="bottom|right" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="75dp"
+            android:gravity="center_horizontal"
+            >
+
+
+            <TextView
+                android:id="@+id/textViewSeguidoresPerfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="000"
+                android:textSize="20dp"
+                android:textColor="@color/primary_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seguidos"
+                android:textColor="@color/primary_text"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+
+            <TextView
+                android:id="@+id/textViewSeguidosPerfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="000"
+                android:textSize="20dp"
+                android:textColor="@color/primary_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seguidores"
+                android:textColor="@color/primary_text"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="25dp"
+        android:background="#000000" />
+
+    <Button
+        android:id="@+id/buttonVerPeliculasPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/ic_movie_black_24dp"
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:paddingLeft="20dp"
+        android:text="Peliculas"
+        android:background="@color/transparente"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/buttonVerSeriesPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+
+        android:background="@color/transparente"
+        android:drawableLeft="@drawable/ic_local_movies_black_24dp"
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:paddingLeft="20dp"
+        android:text="Series"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/buttonVerTvShowsPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/transparente"
+        android:drawableLeft="@drawable/ic_live_tv_black_24dp"
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:paddingLeft="20dp"
+        android:text="TV Shows"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#fff" />
+
+    <Button
+        android:id="@+id/buttonVerUltimosVistosPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/transparente"
+        android:drawableLeft="@drawable/ic_check_black_24dp"
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:paddingLeft="20dp"
+        android:text="Ultimos Vistos"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/buttonVerComentariosPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/transparente"
+        android:drawableLeft="@drawable/ic_comment_black_24dp"
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:paddingLeft="20dp"
+        android:text="Comentarios"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#fff" />
+
+    <Button
+        android:id="@+id/buttonLogoutFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/transparente"
+        android:drawableLeft="@drawable/ic_comment_black_24dp"
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:paddingLeft="20dp"
+        android:text="Cerrar Sesion"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/buttonCerrarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:text="CERRAR SESIÓN"
+        android:textColor="#757575"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+    <Button
+        android:id="@+id/buttonRevocarDatos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:text="REVOCAR DATOS"
+        android:textColor="#757575"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+</LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar"></include>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem1"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:text="tab 1"/>
+
+            <android.support.design.widget.TabItem
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:id="@+id/tabItem2"
+                android:text="tab 2"/>
+
+        </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp">
+        </android.support.v4.view.ViewPager>
+
+    </LinearLayout>
+
+    <include layout="@layout/bottom_bar"></include>
+
+</FrameLayout>
