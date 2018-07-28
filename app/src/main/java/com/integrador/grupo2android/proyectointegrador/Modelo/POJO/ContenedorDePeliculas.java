@@ -6,10 +6,15 @@ import java.util.List;
 
 public class ContenedorDePeliculas {
 
-    @SerializedName("movies")
+    @SerializedName("results")
     private List<Movie> movies;
 
+
     public ContenedorDePeliculas(List<Movie> movies) {
+        this.movies = movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
 

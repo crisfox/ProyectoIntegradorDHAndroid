@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:title="Casa"
         android:id="@+id/buttonCasa"
-        android:icon="@drawable/ic_computer_black_24dp"
-        app:showAsAction="ifRoom"/>
-
+        android:icon="@drawable/compu_off"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/buttonCine"
-        android:icon="@drawable/ic_movie_black_24dp"
+        android:icon="@drawable/cinema_off"
         android:title="Cine"
-        app:showAsAction="always" />
+        app:showAsAction="always"/>
 </menu>

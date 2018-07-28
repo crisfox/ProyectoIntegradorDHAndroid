@@ -1,27 +1,46 @@
 package com.integrador.grupo2android.proyectointegrador.Vista.Activitys;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.integrador.grupo2android.proyectointegrador.Controlador.ControladorUsuarios;
+import com.integrador.grupo2android.proyectointegrador.Modelo.POJO.ContenedorDeUsuarios;
+import com.integrador.grupo2android.proyectointegrador.Modelo.POJO.Usuario;
 import com.integrador.grupo2android.proyectointegrador.R;
-
+import com.integrador.grupo2android.proyectointegrador.Util.GlideApp;
+import com.integrador.grupo2android.proyectointegrador.Util.ResultListener;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.aprilapps.easyphotopicker.DefaultCallback;
+import pl.aprilapps.easyphotopicker.EasyImage;
 
 
 public class ActivityPerfil extends AppCompatActivity {
@@ -32,20 +51,13 @@ public class ActivityPerfil extends AppCompatActivity {
     @BindView(R.id.imageViewFotoPerfil)
     ImageView imageViewFotoPerfil;
 
-    @BindView(R.id.buttonSeguirPerfil)
-    Button buttonSeguirPerfil;
+    @BindView(R.id.buttonLogout)
+    CardView buttonLogout;
 
-    @BindView(R.id.buttonVerPeliculasPerfil)
-    Button buttonVerPeliculasPerfil;
+    FirebaseUser user;
+    Usuario usuarioActivo;
 
-    @BindView(R.id.buttonLogoutFacebook)
-    Button buttonLogoutFacebook;
-
-    private Button buttonCerrarSesion;
-    private Button buttonRevocarDatos;
-    private GoogleApiClient googleApiClient;
-    private FirebaseAuth mAuth;
-
+    private String currentDateTimeString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,80 +65,165 @@ public class ActivityPerfil extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
         ButterKnife.bind(this);
 
-       /* mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        String idDelUsuario = user.getUid();
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (idDelUsuario == null) {
-            Intent intent = new Intent(ActivityPerfil.this, ActivityLogin.class);
-            startActivity(intent);
-            this.finish();
-        }*/
-
-        buttonLogoutFacebook.setOnClickListener(new View.OnClickListener() {
+        if (user == null) {
+            startActivity(new Intent(ActivityPerfil.this, ActivityLogin.class));
+            return;
+        }
+        leerListaDeUsuarios();
+        Toolbar toolbar = findViewById(R.id.toolbar_perfil);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                LoginManager.getInstance().logOut();
-                Intent intentLogin = new Intent(ActivityPerfil.this, ActivityLogin.class);
-                startActivity(intentLogin);
+            public void onClick(View v) {       //Boton para volver atras
+                onBackPressed();
                 finish();
             }
         });
 
-        buttonCerrarSesion = (Button) findViewById(R.id.buttonCerrarSesion);
-        buttonRevocarDatos = (Button) findViewById(R.id.buttonRevocarDatos);
-        textViewNombre = findViewById(R.id.textViewNombre);
 
-        /*textViewNombre.setText(user.getDisplayName());
-        Glide.with(ActivityPerfil.this).load(user.getPhotoUrl()).into(imageViewFotoPerfil);*/
-
-
-
-       /* buttonCerrarSesion.setOnClickListener(new View.OnClickListener() {
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                logOut(view);
+                AuthUI.getInstance()
+                        .signOut(ActivityPerfil.this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Intent intentLogin = new Intent(ActivityPerfil.this, ActivityHome.class);
+                                startActivity(intentLogin);
+                                finish();
+                            }
+                        });
             }
         });
 
-        buttonRevocarDatos.setOnClickListener(new View.OnClickListener() {
+
+        imageViewFotoPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                revocarDatos(view);
+                takeFacha(view);
             }
-        });*/
+        });
+
+    }
+
+    public void leerListaDeUsuarios(){
+        final ControladorUsuarios controladorUsuarios = new ControladorUsuarios();
+        controladorUsuarios.obtenerUsuarios(new ResultListener<ContenedorDeUsuarios>() {
+            @Override
+            public void finish(ContenedorDeUsuarios resultado) {
+                for (Usuario usuario : resultado.getUsuarios()) {
+                    if (usuario.getIdUser().equals(user.getUid())){
+                        usuarioActivo = usuario;
+                        break;
+                    }
+                }
+                textViewNombre.setText(user.getDisplayName());
+                cargarFotoPerfil();
+            }
+        });
+
     }
 
 
-    /*public void logOut(View view) {
-        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if (status.isSuccess()) {
-                    goLogInScreen();
-                } else {
-                    Toast.makeText(getApplicationContext(), "No se pudo cerrar la sesión", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }*/
 
-    /*public void revocarDatos (View view) {
-        Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-            public void onResult(@NonNull Status status) {
-                if (status.isSuccess()) {
-                    goLogInScreen();
-                } else {
-                    Toast.makeText(getApplicationContext(), "No se pudo revocar el acceso", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }*/
-    private void goLogInScreen() {
-        Intent intent = new Intent(this, ActivityPrincipal.class);
-        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP | intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+  public void cargarFotoPerfil() {
+
+        if (usuarioActivo.getFoto().equals("0")){
+            imageViewFotoPerfil.setImageResource(R.drawable.sinfoto);
+        }else if(usuarioActivo.getCargoFoto().equals("false")){
+            GlideApp
+                    .with(this)
+                    .load(usuarioActivo.getFoto())
+                    .centerCrop()
+                    .into(imageViewFotoPerfil);
+        }else{
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReference().child(usuarioActivo.getFoto());
+            GlideApp
+                    .with(this)
+                    .load(storageRef)
+                    .centerCrop()
+                    .into(imageViewFotoPerfil);
+        }
     }
 
+    public void cargarAFirebaseDatabase(){
+        DatabaseReference mDatabase;
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabase = firebaseDatabase.getReference();
+        mDatabase.child("usuarios").child(user.getUid()).child("foto").setValue("/photos_user/" + user.getUid() +"/"+ user.getUid()+ currentDateTimeString);
+        mDatabase.child("usuarios").child(user.getUid()).child("cargoFoto").setValue("true");
+
+    }
+
+
+    public void takeFacha(View view) {
+        EasyImage.openChooserWithGallery(this,"ELEGI", 1);
+    }
+
+
+    public void uploadFacha() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        StorageReference storageRef = storage.getReference();
+
+        StorageReference deleteFile = storageRef.child(usuarioActivo.getFoto());
+        deleteFile.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(ActivityPerfil.this, "Previous Image Deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+        StorageReference imageRef = storageRef.child("photos_user").child(user.getUid()).child(user.getUid()+currentDateTimeString);
+
+
+        imageViewFotoPerfil.setDrawingCacheEnabled(true);
+        imageViewFotoPerfil.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imageViewFotoPerfil.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = imageRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+                Toast.makeText(ActivityPerfil.this, "subida fallida", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                cargarAFirebaseDatabase();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        EasyImage.handleActivityResult(requestCode, resultCode, data, this, new DefaultCallback() {
+            @Override
+            public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
+                //Some error handling
+
+                Toast.makeText(ActivityPerfil.this, "Error"+ String.valueOf(type), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onImagesPicked(List<File> imagesFiles, EasyImage.ImageSource source, int type) {
+                //Handle the images
+                File imageFile = imagesFiles.get(0);
+                Bitmap bitmapDeImagen = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+                imageViewFotoPerfil.setImageBitmap(bitmapDeImagen);
+                uploadFacha();
+            }
+        });
+    }
 
 }

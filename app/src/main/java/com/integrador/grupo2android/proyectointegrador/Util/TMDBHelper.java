@@ -1,8 +1,8 @@
 package com.integrador.grupo2android.proyectointegrador.Util;
 
 public class TMDBHelper {
-    private static String apiKey = "3b8e7c41ac3060fb9b20eb3a64d165e5";
-    private static String baseUrl = "https://api.themoviedb.org/3";
+    public static final String apiKey = "3b8e7c41ac3060fb9b20eb3a64d165e5";
+    public static final String baseUrl = "https://api.themoviedb.org/3";
 
     public static final String language_ENGLISH = "en-US";
     public static final String language_SPANISH = "es-ES";
@@ -58,109 +58,4 @@ public class TMDBHelper {
     public static final String TV_GENRE_MUSIC = "10402";
     public static final String TV_GENRE_ROMANCE = "10749";
 
-
-    public static String getMovieDetailURL(String movieID, String language) {
-        return baseUrl + "/movie/" + movieID + "?api_key=" + apiKey + "&language=" + language;
-    }
-
-    public static String getTrailerURL(String movideID, String language) {
-        return baseUrl + "/movie/" + movideID + "/videos?api_key=" + apiKey + "&language=" + language;
-    }
-
-    public static String getMoviesRecomended(String movideID, String language, Integer page) {
-        return baseUrl + "/movie/" + movideID + "/recomendations?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getSimilarMovies(String movideID, String language, Integer page) {
-        return baseUrl + "/movie/" + movideID + "/similar?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getMoviesReviews(String movideID, String language, Integer page) {
-        return baseUrl + "/movie/" + movideID + "/reviews?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getMoviePlayList(String movideID, String language, Integer page) {
-        return baseUrl + "/movie/" + movideID + "/lists?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getLastestMovie(String language, Integer page) {
-        return baseUrl + "/movie/" + "latest?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getNowPlayingMovies(String language, Integer page) {
-        return baseUrl + "/movie/" + "now_playing?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getPopularMovies(String language, Integer page) {
-        return baseUrl + "/movie/" + "popular?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getBestMoviesOfSpecificYear(String language, String specificYear, Integer page) {
-
-        return baseUrl + "/discover/movie" + "?api_key=" + apiKey + "&primary_release_year=" + specificYear +
-                "&sort_by=vote_average.desc&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getHighestGrossingMovies(String language_ENGLISH, Integer page, String specificYear) {
-
-        return baseUrl + "/discover/movie?api_key=" + apiKey + "&sort_by=revenue.desc" + "&primary_release_year=" + specificYear +
-                "&language=" + language_ENGLISH + "&page=" + page.toString();
-    }
-
-    public static String getTopRatedMovies(String language, Integer page) {
-        return baseUrl + "/discover/movie/" + "?api_key=" + apiKey + "&sort_by=vote_average.desc&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getUpcomingMovies(String language, Integer page) {
-        return baseUrl + "/movie/" + "upcoming?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getImagePoster(String size, String imagePath) {
-        return "https://image.tmdb.org/t/p/" + size + imagePath;
-    }
-
-    public static String getAllGenres(String language) {
-        return baseUrl + "/genre/list?api_key=" + apiKey + "&language=" + language;
-    }
-
-    public static String getMoviesByGenre(String genre, Integer page, String language) {
-        return baseUrl + "/discover/movie?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString() + "&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_genres=" + genre;
-    }
-
-    public static String getTVByGenre(String genre, Integer page, String language) {
-        return baseUrl + "/discover/tv?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString() + "&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_genres=" + genre + "&include_null_first_air_dates=false";
-    }
-
-    public static String getTVShowDetail(String tvShow, String language) {
-        return baseUrl + "/tv/" + tvShow + "?api_key=" + apiKey + "&language=" + language;
-    }
-
-    public static String getTVShowRecomendedForTVShow(String tvShow, String language, Integer page) {
-        return baseUrl + "/tv/" + tvShow + "/recomendations?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getTVPopular(String language, Integer page) {
-        return baseUrl + "/tv/popular?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getTVTopRated(String language, Integer page) {
-        return baseUrl + "/tv/on_the_air?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-    }
-
-    public static String getTVShowVideo(String language, String tvShowId) {
-        return baseUrl + "/tv/" + tvShowId + "/videos?api_key=" + apiKey + "&language=" + language;
-    }
-
-    public static String getTVSeasonDetail(String tvShowId, Integer season, String language) {
-        return baseUrl + "/tv/" + tvShowId + "/season/" + season.toString() + "?api_key=" + apiKey + "&language=" + language;
-    }
-
-    public static String getTVEpisodeDetail(String tvShowId, Integer season, String language) {
-        return baseUrl + "/tv/" + tvShowId + "/season/" + season.toString() + "?api_key=" + apiKey + "&language=" + language;
-    }
-
-    public static String getTVAiringToday(String language, Integer page) {
-        return baseUrl + "/tv/airing_today?api_key=" + apiKey + "&language=" + language + "&page=" + page.toString();
-
-    }
 }

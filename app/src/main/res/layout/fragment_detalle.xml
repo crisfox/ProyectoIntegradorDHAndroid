@@ -1,174 +1,150 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:background="#2e2f30">
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:background="#2e2f30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:background="#000000"
-            android:id="@+id/imageViewAudiovisualCarteleraDetalle"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/elsecretodesusojos" />
-
-        <TextView
-            android:id="@+id/textViewTitulo"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="El secreto de sus ojos"
-            android:textColor="#ffffff"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:layout_marginTop="140dp" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textViewInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="170dp"
-            android:text="2:15:00 hs | Drama - Policial"
-            android:textColor="#ffffff"
-            android:textSize="13dp"
-            android:textStyle="bold" />
+            <FrameLayout
+                android:id="@+id/frameLayoutDeImagen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/layoutPuntuacion"
-            android:layout_margin="15dp"
-            android:layout_below="@id/imageViewAudiovisualCarteleraDetalle"
+                <ImageView
+                    android:id="@+id/imageViewAudiovisualCarteleraDetalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="#000"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/imagen_defecto" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonFavorito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:backgroundTint="@color/transparente"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    app:srcCompat="@drawable/ic_favorite_white_24dp" />
+
+            </FrameLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="100">
-
-            <ImageView
-                android:id="@+id/imageStar1"
-                android:layout_weight="8"
-                android:layout_width="10dp"
-                android:layout_height="35dp"
-                android:src="@android:drawable/btn_star_big_on" />
-
-            <ImageView
-                android:id="@+id/imageStar2"
-                android:layout_weight="8"
-                android:layout_width="10dp"
-                android:layout_height="35dp"
-                android:src="@android:drawable/btn_star_big_on" />
-
-            <ImageView
-                android:id="@+id/imageStar3"
-                android:layout_weight="8"
-                android:layout_width="10dp"
-                android:layout_height="35dp"
-                android:src="@android:drawable/btn_star_big_on" />
-
-            <ImageView
-                android:id="@+id/imageStar4"
-                android:layout_weight="8"
-                android:layout_width="10dp"
-                android:layout_height="35dp"
-                android:src="@android:drawable/btn_star_big_on" />
-
-            <ImageView
-                android:id="@+id/imageStar5"
-                android:layout_weight="8"
-                android:layout_width="10dp"
-                android:layout_height="35dp"
-                android:src="@android:drawable/btn_star" />
-
-            <ImageView
-                android:id="@+id/elredondo"
-                android:layout_weight="8"
-                android:layout_width="10dp"
-                android:layout_height="35dp" />
+            android:layout_height="300dp">
+            <TextView
+                android:id="@+id/textViewTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Título de la película"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="25dp"
+                android:textColor="#f2f2f2"
+                android:textSize="25dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:layout_toLeftOf="@+id/imageButtonFavorito"
+                tools:ignore="NotSibling"
+                android:layout_above="@+id/textViewInfo"/>
 
             <TextView
-                android:id="@+id/textViewPuntuacion"
-                android:gravity="center|left"
-                android:layout_weight="44"
-                android:layout_width="10dp"
-                android:layout_height="35dp"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:text="0.5"
-                android:textSize="20dp" />
+                android:id="@+id/textViewInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="2:15:00 hs | Drama - Policial"
+                android:textColor="#f2f2f2"
+                android:textSize="13dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="4dp"
+                />
+        </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/buttonSend"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_sendceleste"
-                android:layout_width="10dp"
-                android:layout_height="30dp"
-                android:layout_weight="8" />
+            <RelativeLayout
+                android:id="@+id/layoutPuntuacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/frameLayoutDeImagen"
+                android:layout_margin="15dp"
+                android:weightSum="100">
 
-        </LinearLayout>
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="0.2"
+                    android:layout_alignParentStart="true"/>
+                <ImageButton
+                    android:id="@+id/imageButtonShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_share_black_24dp"
+                    android:backgroundTint="#2e2f30"
+                    android:layout_alignParentEnd="true"/>
 
-        <TextView
-            android:id="@+id/textReseñaTitulo"
-            android:layout_marginLeft="15dp"
-            android:layout_below="@id/layoutPuntuacion"
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/buttonAddToList"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignRight="@id/layoutPuntuacion"
+                android:layout_below="@id/layoutPuntuacion"
+                android:backgroundTint="@color/transparente"
+                app:srcCompat="@drawable/ic_playlist_add_white_24dp" />
+
+            <TextView
+                android:id="@+id/textReseñaTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/buttonAddToList"
+                android:layout_below="@id/layoutPuntuacion"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:text="Reseña"
+                android:textSize="18dp"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:id="@+id/textViewResena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textReseñaTitulo"
+                android:layout_below="@+id/textReseñaTitulo"
+                android:text="texto de la reseña"
+                android:textColor="#f2f2f2"
+                android:textSize="20dp"/>
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/buttonPlayTrailer"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@color/transparente"
+            android:src="@android:drawable/ic_media_play"
+            app:layout_anchor="@id/imageViewAudiovisualCarteleraDetalle"
+            app:layout_anchorGravity="center" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_alignBottom="@id/buttonAddToList"
-            android:textColor="#ffffff"
-            android:text="Reseña" />
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back" />
 
-        <ImageView
-            android:id="@+id/buttonAddToList"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_below="@id/layoutPuntuacion"
-            android:layout_alignRight="@id/layoutPuntuacion"
-            android:src="@android:drawable/ic_menu_add" />
+    </android.support.design.widget.CoordinatorLayout>
 
-        <TextView
+</ScrollView>
 
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="50dp"
-            android:layout_below="@id/textReseñaTitulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:text="Un juez tiene dudas acerca de los planes de un oficial de justicia recientemente retirado que intenta descubrir al culpable de la violación y asesinato de una joven, crimen ocurrido varias décadas atrás." />
-
-    </RelativeLayout>
-
-    <ImageButton
-        android:id="@+id/buttonPlayTrailer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_media_play"
-        app:layout_anchor="@id/imageViewAudiovisualCarteleraDetalle"
-        app:layout_anchorGravity="center"
-        android:background="@color/transparente" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/buttonEye"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:layout_marginRight="15dp"
-        android:src="@android:drawable/ic_menu_view"
-        app:fabSize="normal"
-        app:layout_anchor="@id/imageViewAudiovisualCarteleraDetalle"
-        app:layout_anchorGravity="top|right"
-        android:backgroundTint="#76f2f7" />
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@drawable/ic_back" />
-
-
-</android.support.design.widget.CoordinatorLayout>
