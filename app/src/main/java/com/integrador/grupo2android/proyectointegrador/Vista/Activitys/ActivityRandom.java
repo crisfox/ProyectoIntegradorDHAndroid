@@ -1,5 +1,7 @@
 package com.integrador.grupo2android.proyectointegrador.Vista.Activitys;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,6 +38,8 @@ public class ActivityRandom extends AppCompatActivity implements FragmentDetalle
     private ImageView backButtonRandom;
     private FloatingActionButton botonRandom;
     private CardView contenedorDelRandom;
+    private ImageView dado;
+    long animationDuration = 1000;
 
     private static final String TITULO = "titulo";
     private static final String FOTO = "foto";
@@ -54,12 +58,16 @@ public class ActivityRandom extends AppCompatActivity implements FragmentDetalle
         backButtonRandom = findViewById(R.id.backButtonRandom);
         botonRandom = findViewById(R.id.botonRandom);
         contenedorDelRandom = findViewById(R.id.contenedorDelRandom);
+        dado = findViewById(R.id.dado);
 
         fragmentManager = getSupportFragmentManager();
 
         botonRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dado.setVisibility(View.VISIBLE);
+                contenedorDelRandom.setVisibility(View.GONE);
+                tirarElDado();
                 obtenerGenerosRandom();
             }
         });
@@ -70,6 +78,16 @@ public class ActivityRandom extends AppCompatActivity implements FragmentDetalle
                 onBackPressed();
             }
         });
+    }
+
+    private void tirarElDado() {
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(dado, "y",0f, 700f);
+        animatorX.setDuration(animationDuration);
+        ObjectAnimator rotateAnimator = ObjectAnimator.ofFloat(dado, "rotation", 10f, 10000f);
+        rotateAnimator.setDuration(animationDuration);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(animatorX, rotateAnimator);
+        animatorSet.start();
     }
 
     private int generarNumeroAleatorio(Integer maximo) {
@@ -132,11 +150,15 @@ public class ActivityRandom extends AppCompatActivity implements FragmentDetalle
     }
 
     public void cargarFragmentDetalle(Movie movie) {
+        dado.setVisibility(View.INVISIBLE);
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedorDelRandom, FragmentDetalle.dameUnFragment(movie)).commit();
+        contenedorDelRandom.setVisibility(View.VISIBLE);
     }
 
     public void cargarFragmentDetalle(Tv tv) {
+        dado.setVisibility(View.INVISIBLE);
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedorDelRandom, FragmentDetalle.dameUnFragment(tv)).commit();
+        contenedorDelRandom.setVisibility(View.VISIBLE);
     }
 
     @Override

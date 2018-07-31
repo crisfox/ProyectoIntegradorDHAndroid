@@ -56,7 +56,7 @@ public class ActivityDetalle extends AppCompatActivity implements FragmentDetall
             posicionLista = bundle.getInt(Constantes.POSICION_LISTA);
         }
 
-        viewPagerDetalleAdapter = new ViewPagerDetalleAdapter(fragmentManager);
+            viewPagerDetalleAdapter = new ViewPagerDetalleAdapter(fragmentManager);
 
         if (tipoDeLista.equals(Constantes.LISTA_EN_CARTELERA) |
                 tipoDeLista.equals(Constantes.LISTA_PROXIMOS_ESTRENOS) |
